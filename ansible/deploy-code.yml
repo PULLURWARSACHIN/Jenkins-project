@@ -1,0 +1,21 @@
+---
+- name: Deploy project code to remote server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Create app directory
+      file:
+        path: /opt/myapp
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: '0755'
+
+    - name: Copy application files to server
+      copy:
+        src: "{{ item }}"
+        dest: /opt/myapp/
+      loop:
+        - ../index.html
+        - ../style.css
