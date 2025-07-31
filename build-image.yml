@@ -1,0 +1,10 @@
+- name: Build Docker image on QA Node
+  hosts: qa
+  become: true
+  tasks:
+    - name: Build Docker image
+      docker_image:
+        path: /home/ubuntu/proj
+        name: html-css-web
+        tag: latest
+        state: present
